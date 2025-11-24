@@ -1,0 +1,93 @@
+import java.util.Scanner;
+
+public class RelojArenaLleno {
+   public static void main(String[] args) {
+        Scanner s = new Scanner(System.in);
+
+        System.out.print("Introduce la altura del reloj (impar >= 3): ");
+        int altura = s.nextInt();
+
+        if (altura < 3 || altura % 2 == 0) {
+            System.out.println("Error: La altura debe ser impar y >= 3.");
+            return;
+        }
+
+        System.out.print("Introduce la cantidad total de arena: ");
+        int nivelTotal = s.nextInt();
+
+        if (nivelTotal < 0) {
+            System.out.println("Error: La cantidad de arena no puede ser negativa.");
+            return;
+        }
+
+        int alturaMitad = altura / 2;
+        
+        // --- CAMBIO AQUÍ: Lógica más sencilla y fácil de leer ---
+        int arenaAbajo;
+        int arenaArriba;
+
+        if (nivelTotal > alturaMitad) {
+            // CASO 1: Hay mas arena que la mitad del reloj.
+            // La parte de abajo se llena entera y calculamos cuanto sobra para arriba.
+            arenaAbajo = alturaMitad;
+            arenaArriba = nivelTotal - alturaMitad;
+        } else {
+            // CASO 2: La arena cabe toda en la parte de abajo.
+            // Arriba no ponemos nada.
+            arenaAbajo = nivelTotal;
+            arenaArriba = 0;
+        }
+        // --------------------------------------------------------
+
+        // --- PARTE SUPERIOR ---
+        for (int i = 0; i <= alturaMitad; i++) {
+            // Espacios
+            for (int j = 0; j < i; j++) {
+                System.out.print(" ");
+            }
+
+            int anchoFila = altura - (2 * i);
+            for (int j = 0; j < anchoFila; j++) {
+                // Bordes
+                if (i == 0 || j == 0 || j == anchoFila - 1) {
+                    System.out.print("#");
+                } else {
+                    // Interior Parte Arriba
+                    // Solo pintamos asterisco si hay 'arenaArriba' suficiente
+                    // Para que se llene desde el centro hacia arriba, usamos esta condición:
+                    if (arenaArriba > 0 && i >= (alturaMitad + 1) - arenaArriba) {
+                        System.out.print("*");
+                    } else {
+                        System.out.print(" ");
+                    }
+                }
+            }
+            System.out.println();
+        }
+
+        // --- PARTE INFERIOR ---
+        for (int i = 1; i <= alturaMitad; i++) {
+            // Espacios
+            for (int j = 0; j < (alturaMitad - i); j++) {
+                System.out.print(" ");
+            }
+
+            int anchoFila = (i * 2) + 1;
+            for (int j = 0; j < anchoFila; j++) {
+                // Bordes
+                if (i == alturaMitad || j == 0 || j == anchoFila - 1) {
+                    System.out.print("#");
+                } else {
+                    // Interior Parte Abajo
+                    int filasVaciasAbajo = alturaMitad - arenaAbajo;
+                    if (i > filasVaciasAbajo) {
+                        System.out.print("*");
+                    } else {
+                        System.out.print(" ");
+                    }
+                }
+            }
+            System.out.println();
+        }
+    }
+}
