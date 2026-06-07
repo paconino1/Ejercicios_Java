@@ -1,0 +1,21 @@
+El JFrame (layout por defecto) está dividido en tres zonas horizontales: norte, centro y sur. Cada una de ellas es un JPanel.
+
+NORTE (panSuperior)
+Layout por defecto. 
+AutoResizing horizontal y vertical habilitados.
+Cambio color background
+Etiqueta
+
+
+CENTRO (panMedio)
+TitledBorder.
+Layout: GridLayout con 4 filas.
+Cada fila contiene un panel: panMedio1, panMedio2, panMedio3 y panMedio4 todos con layout por defecto.
+En cada uno se insertan los controles habituales: etiqueta y textField en los tres primeros.
+Dos jButton en el cuarto.
+
+
+SUR (panSur)
+Layout por defecto. 
+AutoResizing horizontal y vertical habilitados.
+Text Area con TitledBorder.
